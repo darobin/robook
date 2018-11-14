@@ -9,6 +9,10 @@ commander
   .command('watch <dir>', 'watch the given directory and serve from it')
   .option('-p, --port <n>', 'the port', parseInt)
   .action((command, dir, options) => {
+    if (!options) {
+      dir = options;
+      options = {};
+    }
     robook(
       {
         command,
