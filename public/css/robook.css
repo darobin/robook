@@ -1,7 +1,61 @@
 
-/* XXX: here is the source, we minify right next to it */
 @import "normalize.css";
+@import "./containers.css";
+@import "./tree.css";
 
-/* XXX:
-  - use cssn as a library, have it notify of changes so that we can SSE them and reload the style
- */
+@font-face {
+    font-family: "Catamaran";
+    src: url("fonts/catamaran-black.woff2") format("woff2"),
+         url("fonts/catamaran-black.woff") format("woff");
+    font-weight: 800;
+    font-style: normal;
+}
+@font-face {
+  font-family: "Open Sans";
+  src: url("fonts/OpenSans-Light.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Open Sans";
+  src: url("fonts/OpenSans-LightItalic.woff") format("woff");
+  font-weight: 300;
+  font-style: italic;
+}
+@font-face {
+  font-family: "Open Sans";
+  src: url("fonts/OpenSans-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+:root {
+  --bg: #111;
+  --contrast: #ffb635;
+  --handle: #f4f4f4;
+  --ctx-pane-bg: #e8ecef;
+}
+
+body > div {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* Header part */
+body > div > header {
+  font-family: "Bank Gothic";
+  font-weight: bold;
+  font-size: 1rem;
+  background: var(--bg);
+  color: var(--contrast);
+}
+body > div > header > p {
+  margin: 0;
+  padding-left: 0.6rem;
+}
+
+/* main */
+body > div > main {
+  flex-grow: 1;
+}

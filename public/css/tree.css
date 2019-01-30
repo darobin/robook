@@ -1,0 +1,18 @@
+
+.booktree-node {
+  background: var(--ctx-pane-bg);
+  height: 100%;
+  display: flex;
+}
+
+.booktree-node-chevron {
+  width: 1.2ch;
+  padding: 0 0.3rem 0 0.2rem;
+}
+
+.booktree-node-title_root {
+  font-weight: bold;
+}
+.booktree-node-icon {
+  display: none;
+}
