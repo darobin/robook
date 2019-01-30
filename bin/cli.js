@@ -2,31 +2,37 @@
 
 let robook = require('..')
   , commander = require('commander')
+  , getPort = require('get-port')
 ;
 
 commander
   .version(require('../package.json').version)
-  .command('watch <dir>', 'watch the given directory and serve from it')
+  .option('-o, --open', 'open in browser')
   .option('-p, --port <n>', 'the port', parseInt)
-  .action((command, dir, options) => {
-    if (!options) {
-      dir = options;
-      options = {};
-    }
-    robook(
-      {
-        command,
-        dir,
-        port: options.port
-      },
-      (err) => {
-        if (err) {
-          console.error(err);
-          if (!options.watch) process.exit(42);
+  .option('-d, --dir <path>', 'the directory')
+  .action((options) => {
+    maybeGetPort(options, (err, port) => {
+      if (err) return console.error(err);
+      robook(
+        {
+          dir: options.dir,
+          open: options.open,
+          port,
+        },
+        (err) => {
+          if (err) console.error(err);
+          console.warn(`…`);
         }
-        if (!options.watch) process.exit(0);
-      }
-    );
+      );
+    });
   })
   .parse(process.argv)
 ;
+
+function maybeGetPort (options, cb) {
+  if (options.port) return cb(null, options.port);
+  getPort({ port: 8888 })
+    .then(port => cb(null, port))
+    .catch(cb)
+  ;
+}
